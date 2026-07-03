@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cura — The Revenue Recovery OS for Dental Clinics</title>
+<meta name="description" content="Cura captures every enquiry from every channel, triages private vs NHS demand, protects urgent cases, and shows clinic owners exactly what revenue is at risk.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=Sora:wght@600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ============ CURA LANDING — self-contained, no external CSS/JS ============ */
+:root{
+  --bg:#07060F; --bg2:#0C0A18; --panel:#12101F; --panel2:#171428;
+  --line:rgba(148,140,255,.11); --line2:rgba(148,140,255,.22);
+  --indigo:#4F46E5; --violet:#6D64F5; --glow:#9D95FF; --soft:#C9C4FF;
+  --txt:#F2F0FF; --mut:#9B96BD; --faint:#615D85;
+  --ok:#3DDC97; --warn:#F6C453; --bad:#F87171;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:rgba(109,100,245,.4);color:#fff}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background:
+    radial-gradient(900px 500px at 15% -5%, rgba(79,70,229,.16), transparent 60%),
+    radial-gradient(700px 500px at 90% 10%, rgba(109,100,245,.10), transparent 55%),
+    radial-gradient(900px 700px at 50% 110%, rgba(79,70,229,.08), transparent 60%);}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");}
+main,header,nav,footer{position:relative;z-index:1}
+h1,h2,h3{font-family:'Sora',sans-serif;letter-spacing:-.03em;font-weight:700}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:0;color:var(--soft)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(7,6,15,.82);backdrop-filter:blur(16px);border-bottom-color:var(--line)}
+.nav-in{max-width:1140px;margin:0 auto;padding:18px 28px;display:flex;align-items:center;gap:36px}
+.logo{font-family:'Sora';font-weight:800;font-size:21px;letter-spacing:-.02em}
+.logo i{font-style:normal;color:var(--violet)}
+.nav-links{display:flex;gap:28px;margin-left:auto}
+.nav-links a{font-size:13.5px;font-weight:500;color:var(--mut);transition:color .2s}
+.nav-links a:hover{color:var(--txt)}
+.burger{display:none;margin-left:auto;background:none;border:0;color:var(--txt);font-size:24px;cursor:pointer}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:10px;font-weight:600;font-size:14.5px;cursor:pointer;transition:transform .18s,box-shadow .18s,background .18s;border:0}
+.btn-p{background:linear-gradient(135deg,#5B52F0,#7A71FA);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.15) inset,0 10px 30px -8px rgba(109,100,245,.55)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 16px 38px -8px rgba(109,100,245,.7)}
+.btn-g{background:rgba(148,140,255,.06);border:1px solid var(--line2);color:var(--txt)}
+.btn-g:hover{background:rgba(148,140,255,.12)}
+.btn-sm{padding:9px 18px;font-size:13px;border-radius:8px}
+.btn-lg{padding:16px 32px;font-size:16px;border-radius:12px}
+
+/* ---------- hero ---------- */
+.hero{padding:172px 0 0;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:64px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:500;color:var(--mut);border:1px solid var(--line2);border-radius:99px;padding:7px 15px 7px 9px;background:rgba(148,140,255,.05);margin-bottom:28px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(38px,5vw,64px);line-height:1.04;font-weight:800}
+.hero h1 .serif{font-size:1.04em}
+.hero-sub{margin-top:26px;font-size:17px;color:var(--mut);max-width:520px;font-weight:450}
+.hero-sub b{color:var(--txt);font-weight:600}
+.hero-cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.hero-note{margin-top:16px;font-size:12.5px;color:var(--faint)}
+
+/* dashboard visual */
+.shot{position:relative}
+.shot::before{content:"";position:absolute;inset:-12% -8%;background:radial-gradient(closest-side,rgba(109,100,245,.22),transparent 70%);filter:blur(20px);z-index:0}
+.window{position:relative;z-index:1;background:linear-gradient(165deg,#181530 0%,#100E20 55%,#0C0A18 100%);border:1px solid var(--line2);border-radius:18px;overflow:hidden;box-shadow:0 60px 120px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.02) inset;transform:perspective(1400px) rotateY(-6deg) rotateX(2deg);transition:transform .5s ease}
+.shot:hover .window{transform:perspective(1400px) rotateY(-2deg) rotateX(1deg)}
+.win-bar{display:flex;align-items:center;gap:8px;padding:13px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.015)}
+.win-bar span{width:10px;height:10px;border-radius:50%}
+.wb1{background:#3A3654}.wb2{background:#322E4C}.wb3{background:#2B2745}
+.win-title{margin-left:10px;font-size:11.5px;color:var(--faint);font-weight:500;letter-spacing:.03em}
+.win-badge{margin-left:auto;font-size:9.5px;font-weight:600;letter-spacing:.09em;color:var(--faint);border:1px solid var(--line);border-radius:99px;padding:3px 9px;text-transform:uppercase}
+.win-body{padding:20px}
+.kpi-hero{background:linear-gradient(120deg,rgba(91,82,240,.32),rgba(109,100,245,.08));border:1px solid rgba(148,140,255,.28);border-radius:13px;padding:17px 19px;margin-bottom:13px}
+.kpi-label{font-size:9.5px;font-weight:700;letter-spacing:.14em;color:#A9A3D6;text-transform:uppercase}
+.kpi-big{font-family:'Sora';font-size:37px;font-weight:800;letter-spacing:-.02em;margin-top:3px}
+.kpi-sub{font-size:11.5px;color:var(--glow);margin-top:2px}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:13px}
+.kpi{background:rgba(148,140,255,.045);border:1px solid var(--line);border-radius:11px;padding:12px 13px}
+.kpi b{font-family:'Sora';font-size:17px;font-weight:700;display:block}
+.kpi span{font-size:10px;color:var(--faint)}
+.feed{display:flex;flex-direction:column;gap:8px}
+.feed-row{display:flex;align-items:center;gap:10px;background:rgba(148,140,255,.035);border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:12px;color:var(--mut)}
+.score{font-family:'Sora';font-size:10.5px;font-weight:700;border-radius:6px;padding:2.5px 7px}
+.s-hi{background:rgba(61,220,151,.14);color:var(--ok)}
+.s-md{background:rgba(246,196,83,.13);color:var(--warn)}
+.feed-val{margin-left:auto;font-weight:600;color:var(--txt);font-size:11.5px;font-variant-numeric:tabular-nums}
+
+/* ticker */
+.ticker{margin-top:88px;border-block:1px solid var(--line);padding:17px 0;overflow:hidden;position:relative}
+.ticker::before,.ticker::after{content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.ticker::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.ticker::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.tick-track{display:flex;gap:56px;width:max-content;animation:tick 30s linear infinite;white-space:nowrap}
+@keyframes tick{to{transform:translateX(-50%)}}
+.tick-track span{font-size:13px;font-weight:500;color:var(--faint);letter-spacing:.02em}
+.tick-track b{color:var(--violet);font-weight:600;margin-right:9px}
+
+/* ---------- sections ---------- */
+section{padding:112px 0}
+.kick{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--glow);margin-bottom:20px}
+.kick::before{content:"";width:26px;height:1px;background:var(--violet)}
+h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;max-width:760px}
+.lede{margin-top:20px;font-size:17.5px;color:var(--mut);max-width:600px;font-weight:450}
+
+/* problem — editorial numbered list */
+.prob-list{margin-top:64px;border-top:1px solid var(--line)}
+.prob{display:grid;grid-template-columns:88px 1.1fr 1.6fr;gap:28px;padding:34px 8px;border-bottom:1px solid var(--line);align-items:baseline;transition:background .25s}
+.prob:hover{background:rgba(148,140,255,.025)}
+.prob-n{font-family:'Instrument Serif',serif;font-style:italic;font-size:34px;color:var(--faint)}
+.prob h3{font-size:19px;letter-spacing:-.02em}
+.prob p{font-size:15px;color:var(--mut)}
+
+/* flow */
+.flow{margin-top:70px;display:grid;grid-template-columns:1fr auto 1fr;gap:34px;align-items:center}
+.flow-col{display:flex;flex-direction:column;gap:10px}
+.chip-in,.chip-out{font-size:13px;padding:11px 18px;border-radius:10px;border:1px solid var(--line);background:rgba(148,140,255,.04);color:var(--mut);display:flex;align-items:center;gap:10px}
+.chip-in i{font-style:normal;opacity:.8}
+.chip-out{border-color:rgba(61,220,151,.2);background:rgba(61,220,151,.05);color:var(--txt)}
+.chip-out::before{content:"✓";color:var(--ok);font-weight:700}
+.core{position:relative;text-align:center;padding:46px 52px;border-radius:22px;background:
+  radial-gradient(120% 120% at 30% 20%, rgba(148,140,255,.25), transparent 50%),
+  linear-gradient(150deg,#221D45,#151230);border:1px solid var(--line2);box-shadow:0 30px 80px -20px rgba(79,70,229,.45)}
+.core b{font-family:'Sora';font-size:30px;font-weight:800;letter-spacing:.1em}
+.core span{display:block;margin-top:8px;font-size:12px;color:var(--mut);letter-spacing:.02em}
+.core::before,.core::after{content:"";position:absolute;top:50%;width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--violet))}
+.core::before{left:-34px}
+.core::after{right:-34px;transform:scaleX(-1)}
+
+/* bento modules */
+.bento{margin-top:64px;display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.cell{grid-column:span 2;background:linear-gradient(165deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:30px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.cell:hover{border-color:var(--line2);transform:translateY(-3px)}
+.cell.w3{grid-column:span 3}
+.cell::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(148,140,255,.35),transparent)}
+.cell-n{font-family:'Instrument Serif',serif;font-style:italic;font-size:15px;color:var(--violet);display:block;margin-bottom:14px}
+.cell h3{font-size:18px;margin-bottom:10px;letter-spacing:-.02em}
+.cell p{font-size:14px;color:var(--mut)}
+.cell.hl{background:linear-gradient(155deg,rgba(91,82,240,.2),var(--panel));border-color:rgba(148,140,255,.3)}
+
+/* before/after */
+.ba{margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ba > div{border-radius:20px;padding:36px;border:1px solid var(--line)}
+.ba-b{background:var(--panel)}
+.ba-a{background:linear-gradient(160deg,rgba(91,82,240,.16),var(--panel));border-color:var(--line2)}
+.ba h3{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:24px}
+.ba-a h3{color:var(--glow)}
+.ba li{list-style:none;padding:11px 0 11px 30px;position:relative;font-size:14.5px;color:var(--mut);border-bottom:1px solid rgba(148,140,255,.06)}
+.ba li:last-child{border:0}
+.ba-b li::before{content:"×";position:absolute;left:2px;color:var(--bad);font-weight:700;font-size:16px}
+.ba-a li::before{content:"✓";position:absolute;left:2px;color:var(--ok);font-weight:700}
+.ba-a li{color:var(--txt)}
+
+/* leaks */
+.leaks{margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.leak{background:linear-gradient(165deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:32px;transition:border-color .3s}
+.leak:hover{border-color:var(--line2)}
+.leak-fig{font-family:'Sora';font-size:38px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(100deg,var(--soft),var(--glow));-webkit-background-clip:text;background-clip:text;color:transparent}
+.leak h3{font-size:17px;margin:12px 0 10px}
+.leak p{font-size:14px;color:var(--mut)}
+.fine{margin-top:26px;font-size:12px;color:var(--faint)}
+
+/* wide dash */
+.dashwide .window{transform:none;max-width:940px;margin:64px auto 0}
+.dash-cols{display:grid;grid-template-columns:1.25fr 1fr;gap:15px}
+.dpanel{background:rgba(148,140,255,.04);border:1px solid var(--line);border-radius:13px;padding:17px}
+.brow{display:grid;grid-template-columns:86px 1fr 70px;gap:12px;align-items:center;margin-top:12px;font-size:12px;color:var(--mut)}
+.brow b{text-align:right;font-size:12px;color:var(--txt);font-variant-numeric:tabular-nums;font-weight:600}
+.track{height:7px;border-radius:99px;background:rgba(148,140,255,.09);overflow:hidden}
+.fill{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--indigo),var(--glow));width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.stat-line{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(148,140,255,.07);font-size:12.5px;color:var(--mut)}
+.stat-line:last-child{border:0}
+.stat-line b{color:var(--ok);font-weight:600;font-size:12px}
+
+/* pilot strip */
+.pilot-strip{border-block:1px solid var(--line);background:linear-gradient(180deg,rgba(148,140,255,.03),transparent);padding:88px 0}
+.pilot-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.pilot-facts{display:flex;flex-direction:column;gap:0;border-left:1px solid var(--line2);padding-left:34px}
+.pf{padding:16px 0}
+.pf b{display:block;font-family:'Sora';font-size:16px;margin-bottom:4px}
+.pf span{font-size:14px;color:var(--mut)}
+
+/* growth + safety small grids */
+.grid2{margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.gcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px}
+.gcard h3{font-size:16.5px;margin-bottom:9px}
+.gcard p{font-size:14px;color:var(--mut)}
+.safety-list{margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
+.srow{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+.srow i{font-style:normal;flex-shrink:0;width:34px;height:34px;border-radius:9px;background:rgba(148,140,255,.07);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:15px}
+.srow h3{font-size:15px;margin-bottom:4px}
+.srow p{font-size:13.5px;color:var(--mut)}
+
+/* pricing */
+.plans{margin-top:64px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
+.plan{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:30px;transition:transform .3s,border-color .3s}
+.plan:hover{transform:translateY(-4px);border-color:var(--line2)}
+.plan.star{background:linear-gradient(165deg,rgba(91,82,240,.24),var(--panel));border-color:rgba(148,140,255,.35);box-shadow:0 30px 70px -25px rgba(79,70,229,.5)}
+.plan-tag{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--glow)}
+.plan-n{font-family:'Sora';font-size:25px;font-weight:800;margin:10px 0 14px}
+.plan p{font-size:13.5px;color:var(--mut);flex:1;margin-bottom:24px}
+.plan .btn{justify-content:center}
+
+/* faq */
+.faq{margin-top:56px;max-width:780px}
+details{border-bottom:1px solid var(--line);padding:4px 0}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 4px;font-family:'Sora';font-size:16.5px;font-weight:600;letter-spacing:-.01em}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:'Inter';font-weight:400;font-size:24px;color:var(--violet);transition:transform .25s;flex-shrink:0}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 4px 24px;font-size:15px;color:var(--mut);max-width:660px}
+
+/* cta */
+.cta{padding:130px 0;text-align:center;position:relative}
+.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 340px at 50% 30%,rgba(109,100,245,.18),transparent 70%);pointer-events:none}
+.cta h2{margin:0 auto}
+.cta .lede{margin:20px auto 40px}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:44px 0 56px}
+.foot{display:flex;flex-direction:column;gap:10px}
+.foot span{font-size:13px;color:var(--faint)}
+.foot .tiny{font-size:11px;max-width:680px;line-height:1.7}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.rv2{transition-delay:.12s}.rv3{transition-delay:.22s}
+
+/* responsive */
+@media(max-width:1000px){
+  .hero-grid,.pilot-grid{grid-template-columns:1fr;gap:52px}
+  .window{transform:none}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .cell,.cell.w3{grid-column:span 1}
+  .plans{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:1fr}
+  .core::before,.core::after{display:none}
+  .prob{grid-template-columns:56px 1fr;grid-template-rows:auto auto}
+  .prob p{grid-column:2}
+  .safety-list{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  section{padding:76px 0}
+  .hero{padding-top:130px}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--bg2);border-bottom:1px solid var(--line);padding:10px 28px 20px}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 0}
+  .burger{display:block}
+  .nav-cta{display:none}
+  .ba,.leaks,.grid2,.plans,.dash-cols,.kpi-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">Cura<i>.</i></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#problem">The Leak</a>
+      <a href="#product">Product</a>
+      <a href="#pilot">Pilot</a>
+      <a href="#groups">Groups</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#cta" class="btn btn-p btn-sm nav-cta">Book a demo</a>
+    <button class="burger" id="burger" aria-label="menu">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> Pilot live at AF Dental Dover — built with a working UK clinic</div>
+      <h1>Your clinic loses revenue at the <span class="serif">front door.</span><br>Cura closes it.</h1>
+      <p class="hero-sub">Missed calls, 9pm website forms, unread DMs — high-intent patients leaking away with <b>no record they ever existed</b>. Cura captures every enquiry from every channel, values it in pounds, and tells your team exactly what to action first.</p>
+      <div class="hero-cta">
+        <a href="#cta" class="btn btn-p">Book a demo</a>
+        <a href="#problem" class="btn btn-g">See where clinics leak →</a>
+      </div>
+      <p class="hero-note">20 minutes · sample data only · no patient information required</p>
+    </div>
+    <div class="shot rv">
+      <div class="window">
+        <div class="win-bar">
+          <span class="wb1"></span><span class="wb2"></span><span class="wb3"></span>
+          <span class="win-title">Cura — Command Centre</span>
+          <span class="win-badge">Preview · sample data</span>
+        </div>
+        <div class="win-body">
+          <div class="kpi-hero">
+            <div class="kpi-label">Pipeline value this month</div>
+            <div class="kpi-big">£<span data-count="23500">0</span></div>
+            <div class="kpi-sub">↑ 4 high-value leads awaiting contact</div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi"><b>£6,400</b><span>revenue at risk</span></div>
+            <div class="kpi"><b>3</b><span>missed calls captured</span></div>
+            <div class="kpi"><b>2</b><span>urgent — protected</span></div>
+          </div>
+          <div class="feed">
+            <div class="feed-row"><span class="score s-hi">9.1</span> Implant enquiry · website <span class="feed-val">£3,500</span></div>
+            <div class="feed-row"><span class="score s-hi">8.4</span> Clear aligners · WhatsApp <span class="feed-val">£3,000</span></div>
+            <div class="feed-row"><span class="score s-md">6.2</span> Whitening · missed call <span class="feed-val">£350</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker">
+    <div class="tick-track" id="tick">
+      <span><b>WEBSITE</b> captured in seconds</span>
+      <span><b>EMAIL</b> threads deduplicated</span>
+      <span><b>MISSED CALLS</b> become callback tasks</span>
+      <span><b>WHATSAPP</b> one pipeline</span>
+      <span><b>META DMs</b> owned, finally</span>
+      <span><b>URGENT</b> escalated to humans, always</span>
+      <span><b>NHS · PRIVATE · MIXED</b> separated automatically</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+    <div class="kick rv">The leak</div>
+    <h2 class="rv">Private dentistry doesn't lose money in the chair. It loses it <span class="serif">before hello.</span></h2>
+    <p class="lede rv rv2">Lost enquiries leave no trace — which is why no practice owner can tell you their real number. That silence is the most expensive thing in your business.</p>
+    <div class="prob-list rv rv3">
+      <div class="prob"><span class="prob-n">01</span><h3>Missed calls vanish</h3><p>The phone rings out at lunch, after five, on Saturday. The patient books with whoever answers next. There is no record it ever happened.</p></div>
+      <div class="prob"><span class="prob-n">02</span><h3>Slow replies lose intent</h3><p>An implant enquiry answered in five minutes and one answered tomorrow are two different businesses. High-intent patients shop two or three clinics — first credible response usually wins.</p></div>
+      <div class="prob"><span class="prob-n">03</span><h3>DMs nobody owns</h3><p>Instagram, Facebook, WhatsApp, website chat. Enquiries scattered across inboxes with no owner, no priority, no clock.</p></div>
+      <div class="prob"><span class="prob-n">04</span><h3>NHS and private blur together</h3><p>Mixed clinics can't see which enquiries are contract demand, which are private revenue — and which NHS patient just quietly asked about whitening.</p></div>
+      <div class="prob"><span class="prob-n">05</span><h3>£18,000 filed as admin</h3><p>A full-arch enquiry and a reschedule land in the same inbox and get the same priority: none. Your inbox doesn't know what anything is worth.</p></div>
+      <div class="prob"><span class="prob-n">06</span><h3>Owners see half the picture</h3><p>Your PMS shows what was booked. It will never show what was asked for and lost — and that's the number that decides your growth.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="product" style="padding-top:0">
+  <div class="wrap">
+    <div class="kick rv">The fix</div>
+    <h2 class="rv">Many channels. <span class="serif">One brain.</span></h2>
+    <p class="lede rv rv2">Cura sits behind everything you already have. Nothing changes for patients — everything changes for you.</p>
+    <div class="flow rv rv3">
+      <div class="flow-col">
+        <span class="chip-in"><i>🌐</i> Website form</span>
+        <span class="chip-in"><i>✉️</i> Email inbox</span>
+        <span class="chip-in"><i>📞</i> Missed calls</span>
+        <span class="chip-in"><i>💬</i> WhatsApp</span>
+        <span class="chip-in"><i>📱</i> Meta DMs</span>
+        <span class="chip-in"><i>📍</i> Google profile</span>
+      </div>
+      <div class="core"><b>CURA</b><span>captures · triages · values · protects · routes</span></div>
+      <div class="flow-col">
+        <span class="chip-out">Scored lead with £ value</span>
+        <span class="chip-out">Staff task with priority &amp; SLA</span>
+        <span class="chip-out">Urgent case → human, instantly</span>
+        <span class="chip-out">Owner dashboard, live</span>
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="cell w3 hl rv"><span class="cell-n">no. 1 — Capture</span><h3>Nothing slips past the desk again</h3><p>Every channel feeds one deduplicated pipeline — including the calls nobody answered and the forms that arrived at midnight. If a patient reached out, it exists in Cura.</p></div>
+      <div class="cell w3 rv rv2"><span class="cell-n">no. 2 — Triage</span><h3>Every enquiry understood in seconds</h3><p>Treatment, private/NHS/mixed, urgency, estimated value, score out of ten. An implant enquiry stops looking like a reschedule the moment it arrives.</p></div>
+      <div class="cell rv"><span class="cell-n">no. 3 — Staff actions</span><h3>A ranked list, not a guessing game</h3><p>High-value lead? Top of the list with a clock on it. Your team always knows the next most valuable action.</p></div>
+      <div class="cell rv rv2"><span class="cell-n">no. 4 — Revenue recovery</span><h3>Leads flagged before they die</h3><p>A live "revenue at risk" figure — value going cold right now, surfaced while you can still act. Not a post-mortem.</p></div>
+      <div class="cell rv rv3"><span class="cell-n">no. 5 — Safety gating</span><h3>Patients in pain are not pipeline</h3><p>Urgent cases escalate to humans immediately and are excluded from revenue tracking. No diagnosis, no clinical advice — hard-coded, not configurable.</p></div>
+      <div class="cell w3 rv"><span class="cell-n">no. 6 — Owner dashboard</span><h3>What was asked for — not just what was booked</h3><p>Pipeline by treatment, demand by source, NHS vs private vs mixed, response times, at-risk value. The whole front door on one screen, built for owners, not software people.</p></div>
+      <div class="cell w3 rv rv2"><span class="cell-n">no. 7 — Growth layer</span><h3>When capture is proven, pour fuel on it</h3><p>Google Ads, Meta retargeting and consent-safe reactivation — every pound of spend tracked through to booked consultations, inside the same system.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kick rv">The shift</div>
+    <h2 class="rv">Before Cura <span class="serif">vs.</span> after Cura</h2>
+    <div class="ba rv rv2">
+      <div class="ba-b">
+        <h3>Before</h3>
+        <ul>
+          <li>Phone rings out — nobody ever knows</li>
+          <li>Implant enquiry sits in the inbox overnight</li>
+          <li>Instagram DM seen four days later</li>
+          <li>Front desk works whatever's on top</li>
+          <li>NHS and private demand indistinguishable</li>
+          <li>Owner's view: bookings only</li>
+        </ul>
+      </div>
+      <div class="ba-a">
+        <h3>After</h3>
+        <ul>
+          <li>Missed call → callback task in seconds, number attached</li>
+          <li>Implant enquiry scored 9/10, valued, top of the list</li>
+          <li>Every DM in one pipeline, same SLA as a phone call</li>
+          <li>Front desk works ranked, valued, time-boxed tasks</li>
+          <li>Private pipeline, NHS demand, mixed cases — separated</li>
+          <li>Owner's view: asked for, won, at risk, lost — in pounds</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAKS -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kick rv">Illustrative examples — typical UK private treatment values</div>
+    <h2 class="rv">What one leaked lead <span class="serif">actually costs</span></h2>
+    <div class="leaks rv rv2">
+      <div class="leak"><div class="leak-fig">£3,500+</div><h3>The implant call that rang out</h3><p>Saturday morning enquiry. No answer, no record, no callback. The patient's implant journey happens — at another clinic. Cura logs the call and creates the callback task before they've put the phone down.</p></div>
+      <div class="leak"><div class="leak-fig">£3,000</div><h3>The aligner lead nobody chased</h3><p>Form filled at 9pm. Reply sent… eventually. Aligner patients shop around; the first credible response usually wins. Cura scores it, values it, and puts it on top of tomorrow's list.</p></div>
+      <div class="leak"><div class="leak-fig">£6,400</div><h3>The veneers DM in the wrong inbox</h3><p>A smile-makeover DM seen days later by whoever happened to check. In Cura it's a scored, valued lead with an owner and an SLA — exactly as if they'd phoned.</p></div>
+      <div class="leak"><div class="leak-fig serif" style="font-size:34px">hidden</div><h3>The NHS enquiry concealing a private one</h3><p>"I'm an NHS patient, but I've been thinking about whitening…" Most desks file it under admin. Cura flags the mixed opportunity and routes the private interest to your team.</p></div>
+    </div>
+    <p class="fine">Figures are illustrative examples based on typical UK private treatment fees — not client results.</p>
+  </div>
+</section>
+
+<!-- DASHBOARD WIDE -->
+<section class="dashwide" style="padding-top:0">
+  <div class="wrap">
+    <div class="kick rv">The owner's view</div>
+    <h2 class="rv">One screen. <span class="serif">The whole front door.</span></h2>
+    <div class="window rv rv2">
+      <div class="win-bar">
+        <span class="wb1"></span><span class="wb2"></span><span class="wb3"></span>
+        <span class="win-title">Cura — Revenue</span>
+        <span class="win-badge">Preview · sample data</span>
+      </div>
+      <div class="win-body dash-cols">
+        <div class="dpanel">
+          <div class="kpi-label">Pipeline by treatment</div>
+          <div class="brow"><span>Full arch</span><span class="track"><span class="fill" data-w="92%"></span></span><b>£18,000</b></div>
+          <div class="brow"><span>Implants</span><span class="track"><span class="fill" data-w="66%"></span></span><b>£10,500</b></div>
+          <div class="brow"><span>Veneers</span><span class="track"><span class="fill" data-w="38%"></span></span><b>£6,400</b></div>
+          <div class="brow"><span>Aligners</span><span class="track"><span class="fill" data-w="34%"></span></span><b>£6,000</b></div>
+          <div class="brow"><span>Whitening</span><span class="track"><span class="fill" data-w="9%"></span></span><b>£1,050</b></div>
+        </div>
+        <div class="dpanel">
+          <div class="kpi-label">Team response</div>
+          <div class="stat-line">Urgent escalations <b>100% same-hour</b></div>
+          <div class="stat-line">High-value callbacks <b>avg 42 min</b></div>
+          <div class="stat-line">Missed-call recovery <b>9 of 11 reached</b></div>
+          <div class="kpi-label" style="margin-top:18px">Demand split</div>
+          <div class="stat-line">Private <b style="color:var(--glow)">58%</b></div>
+          <div class="stat-line">NHS <b style="color:var(--mut)">27%</b></div>
+          <div class="stat-line">Mixed opportunity <b style="color:var(--warn)">15%</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILOT -->
+<div class="pilot-strip" id="pilot">
+  <div class="wrap pilot-grid">
+    <div>
+      <div class="kick rv">Honest status</div>
+      <h2 class="rv">Built with a real clinic, <span class="serif">not a slide deck</span></h2>
+      <p class="lede rv rv2">Cura is in implementation at <b style="color:var(--txt)">AF Dental Dover</b>, a mixed NHS/private practice in Kent. The full system is deployed and security-verified; channel go-live follows the clinic's clinical sign-off. When we publish numbers, they'll be real ones.</p>
+    </div>
+    <div class="pilot-facts rv rv3">
+      <div class="pf"><b>Deployed &amp; verified</b><span>Secure backend live. Enquiry-to-triaged-lead pipeline proven end to end.</span></div>
+      <div class="pf"><b>Zero public data access</b><span>Patient database locked down and audited — verified with security checks, not promises.</span></div>
+      <div class="pf"><b>Dentist holds the pen</b><span>Every patient-facing word approved by the clinician before anything goes live.</span></div>
+      <div class="pf"><b>Founder pricing for early clinics</b><span>Shape the product; keep the rate.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- GROUPS -->
+<section id="groups">
+  <div class="wrap">
+    <div class="kick rv">For groups &amp; multi-site operators</div>
+    <h2 class="rv">Ten clinics. Ten front doors. <span class="serif">One standard.</span></h2>
+    <p class="lede rv rv2">Across a group, enquiry handling is the least standardised process you own — and the closest one to revenue.</p>
+    <div class="grid2 rv rv3">
+      <div class="gcard"><h3>Standardise capture</h3><p>Every site captures and triages the same way, to the same SLA, with the same safety rules — regardless of who's on the desk that day.</p></div>
+      <div class="gcard"><h3>Compare sites honestly</h3><p>Volume, response times, conversion and leakage per clinic, side by side. Find out which site's "quiet month" was an unanswered-phone month.</p></div>
+      <div class="gcard"><h3>See demand before you invest</h3><p>Treatment demand by site tells you where the next implant surgeon or scanner belongs — from what patients asked for, not gut feel.</p></div>
+      <div class="gcard"><h3>Profile acquisitions in week one</h3><p>Plug Cura into a newly acquired practice and see its true demand, channel mix and leakage before you change anything else.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kick rv">Safety &amp; compliance</div>
+    <h2 class="rv">Boring by design, <span class="serif">where it matters</span></h2>
+    <div class="safety-list rv rv2">
+      <div class="srow"><i>🚫</i><div><h3>No diagnosis, ever</h3><p>Clinical questions route to your team. Hard-coded, not a setting.</p></div></div>
+      <div class="srow"><i>🚨</i><div><h3>Urgent cases protected</h3><p>Pain, swelling, trauma → immediate human escalation, excluded from revenue tracking until resolved.</p></div></div>
+      <div class="srow"><i>✍️</i><div><h3>Approved wording only</h3><p>Every patient-facing message pattern is signed off by the clinic's dentist before go-live.</p></div></div>
+      <div class="srow"><i>🛑</i><div><h3>Opt-out honoured instantly</h3><p>STOP or unsubscribe is detected before anything else runs — locked permanently, fully audited.</p></div></div>
+      <div class="srow"><i>🔒</i><div><h3>UK GDPR aligned</h3><p>Locked-down database, zero public access, full audit trail, consent records for any marketing contact.</p></div></div>
+      <div class="srow"><i>👩‍⚕️</i><div><h3>The dentist stays in charge</h3><p>Cura drafts, routes and tracks. Your clinicians decide. Every automated action is logged.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="padding-top:0">
+  <div class="wrap">
+    <div class="kick rv">Pricing</div>
+    <h2 class="rv">Priced like it pays for itself — <span class="serif">because one lead does</span></h2>
+    <div class="plans rv rv2">
+      <div class="plan star">
+        <span class="plan-tag">Founder pilot</span>
+        <div class="plan-n">By invitation</div>
+        <p>For the first clinics. Full system, white-glove setup, direct founder access. Founder pricing locked for life in exchange for feedback and a case study when results are real.</p>
+        <a href="#cta" class="btn btn-p">Apply for pilot</a>
+      </div>
+      <div class="plan">
+        <span class="plan-tag">Core</span>
+        <div class="plan-n">£&thinsp;—&thinsp;/mo</div>
+        <p>Capture, triage, staff tasks and the owner dashboard across website, email and missed calls. The revenue-leak fix.</p>
+        <a href="#cta" class="btn btn-g">Talk to us</a>
+      </div>
+      <div class="plan">
+        <span class="plan-tag">Growth</span>
+        <div class="plan-n">£&thinsp;—&thinsp;/mo</div>
+        <p>Everything in Core plus WhatsApp and social channels, ads attribution, landing pages and consent-safe reactivation.</p>
+        <a href="#cta" class="btn btn-g">Talk to us</a>
+      </div>
+      <div class="plan">
+        <span class="plan-tag">Group</span>
+        <div class="plan-n">Custom</div>
+        <p>Multi-site rollout, cross-clinic comparison, standardised SLAs and central reporting for operators.</p>
+        <a href="#cta" class="btn btn-g">Book a group call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="kick rv">FAQ</div>
+    <h2 class="rv">Fair questions</h2>
+    <div class="faq rv rv2">
+      <details><summary>Does AI talk to my patients?</summary><p>Only with wording your dentist has approved, only for enquiry handling, never for anything clinical. Urgent cases go straight to humans. Until you approve wording, Cura runs in capture-and-route mode: your team replies, Cura makes sure nothing is missed.</p></details>
+      <details><summary>We already have a receptionist.</summary><p>Keep them — Cura makes them dangerous. It catches what a desk physically can't: the 7pm form, the Saturday missed call, the Instagram DM. Your team gets a ranked task list instead of a guessing game.</p></details>
+      <details><summary>We're a mixed NHS/private practice.</summary><p>So is our pilot clinic. Cura separates private revenue, NHS demand and mixed opportunities — NHS enquiries tracked for your contract, and the private interest hiding inside them stops slipping through.</p></details>
+      <details><summary>We use Dentally / another PMS.</summary><p>Cura works in front of your PMS, not instead of it. Patients still book into your existing diary. PMS sync — starting with Dentally — is on the roadmap to close the loop automatically.</p></details>
+      <details><summary>What about GDPR?</summary><p>Patient data lives in a locked-down database with zero public access, encrypted in transit, full audit trail. Marketing contact only happens with recorded consent, and opt-outs are enforced instantly and permanently.</p></details>
+      <details><summary>How do we know it makes money?</summary><p>You watch your own numbers: missed calls captured, response times, pipeline value created, revenue at risk recovered — from week one, on real enquiries. We don't ask you to believe a case study; we show you your own front door.</p></details>
+      <details><summary>How long does setup take?</summary><p>The system deploys in days. Go-live is gated on the only thing that should gate it: your dentist approving how patients are spoken to.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="wrap">
+    <h2>Find out what your front door <span class="serif">is leaking</span></h2>
+    <p class="lede" style="text-align:center">A 20-minute call. We map your channels, show you the dashboard, and give you an honest read on whether Cura fits your clinic.</p>
+    <div class="cta-btns">
+      <a class="btn btn-p btn-lg" href="mailto:zacalmassari@gmail.com?subject=Cura%20demo%20request">Book a demo</a>
+      <a class="btn btn-g btn-lg" href="mailto:zacalmassari@gmail.com?subject=Cura%20capture%20audit">Request a capture audit</a>
+    </div>
+    <p class="fine" style="text-align:center;margin-top:26px">No obligation. Demos run on sample data — no patient information required.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="logo">Cura<i>.</i></span>
+    <span>The revenue recovery &amp; growth operating system for dental clinics.</span>
+    <span class="tiny">Dashboard imagery shows sample/demo data. Treatment values are illustrative UK averages, not guaranteed or client results. Cura never provides clinical advice or diagnosis; urgent cases are always escalated to clinical staff.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // nav state
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>10)},{passive:true});
+  // mobile menu
+  var b=document.getElementById('burger'),l=document.getElementById('navLinks');
+  b.addEventListener('click',function(){l.classList.toggle('open')});
+  l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){l.classList.remove('open')})});
+  // duplicate ticker for seamless loop
+  var t=document.getElementById('tick');t.innerHTML+=t.innerHTML;
+  // reveal
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.13});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+  // counters
+  var co=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;var el=e.target,tg=+el.dataset.count,t0=performance.now();
+    (function tk(t){var p=Math.min((t-t0)/1100,1);el.textContent=Math.round(tg*(1-Math.pow(1-p,3))).toLocaleString('en-GB');if(p<1)requestAnimationFrame(tk)})(t0);co.unobserve(el);
+  })},{threshold:.5});
+  document.querySelectorAll('[data-count]').forEach(function(el){co.observe(el)});
+  // bar fills
+  var bo=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.fill').forEach(function(f,i){setTimeout(function(){f.style.width=f.dataset.w},i*90)});
+    bo.unobserve(e.target);
+  })},{threshold:.3});
+  document.querySelectorAll('.dashwide .window').forEach(function(el){bo.observe(el)});
+})();
+</script>
+</body>
+</html>
